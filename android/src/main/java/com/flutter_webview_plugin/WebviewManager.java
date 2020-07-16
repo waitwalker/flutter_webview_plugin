@@ -382,6 +382,7 @@ class WebviewManager {
             boolean debuggingEnabled,
             boolean ignoreSSLErrors
     ) {
+        webView.getSettings().setSavePassword(false);
         webView.getSettings().setJavaScriptEnabled(withJavascript);
         webView.getSettings().setBuiltInZoomControls(withZoom);
         webView.getSettings().setSupportZoom(withZoom);
