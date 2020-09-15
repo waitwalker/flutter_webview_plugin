@@ -124,6 +124,7 @@ static NSString *const CHANNEL_NAME = @"flutter_webview_plugin";
 
     if (userAgent != (id)[NSNull null]) {
         [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent": userAgent}];
+        [self updateUserAgent:userAgent];
     }
 
     CGRect rc;
@@ -160,6 +161,14 @@ static NSString *const CHANNEL_NAME = @"flutter_webview_plugin";
     [currentViewController.view addSubview:self.webview];
 
     [self navigate:call];
+}
+
+- (void)updateUserAgent:(NSString*)userAgent {
+  if (@available(iOS 9.0, *)) {
+    [self.webview setCustomUserAgent:userAgent];
+  } else {
+    NSLog(@"Updating UserAgent is not supported for Flutter WebViews prior to iOS 9.");
+  }
 }
 
 - (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler {
