@@ -10,10 +10,10 @@ const kAndroidUserAgent =
 String selectedUrl = 'https://flutter.io';
 
 // ignore: prefer_collection_literals
-final Set<JavascriptChannel> jsChannels = [
-  JavascriptChannel(
+final Set<MTTJavascriptChannel> jsChannels = [
+  MTTJavascriptChannel(
       name: 'Print',
-      onMessageReceived: (JavascriptMessage message) {
+      onMessageReceived: (MTTJavascriptMessage message) {
         print(message.message);
       }),
 ].toSet();

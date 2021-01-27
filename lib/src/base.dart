@@ -3,9 +3,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_webview_plugin/src/javascript_channel.dart';
+import 'package:flutter_webview_plugin/src/mtt_javascript_channel.dart';
 
-import 'javascript_message.dart';
+import 'mtt_javascript_message.dart';
 
 const _kChannel = 'flutter_webview_plugin';
 
@@ -41,12 +41,12 @@ class FlutterWebviewPlugin {
   final _onScrollYChanged = StreamController<double>.broadcast();
   final _onProgressChanged = new StreamController<double>.broadcast();
   final _onHttpError = StreamController<WebViewHttpError>.broadcast();
-  final _onPostMessage = StreamController<JavascriptMessage>.broadcast();
+  final _onPostMessage = StreamController<MTTJavascriptMessage>.broadcast();
 
-  final Map<String, JavascriptChannel> _javascriptChannels =
+  final Map<String, MTTJavascriptChannel> _javascriptChannels =
       // ignoring warning as min SDK version doesn't support collection literals yet
       // ignore: prefer_collection_literals
-      Map<String, JavascriptChannel>();
+      Map<String, MTTJavascriptChannel>();
 
   Future<Null> _handleMessages(MethodCall call) async {
     switch (call.method) {
@@ -144,7 +144,7 @@ class FlutterWebviewPlugin {
   Future<Null> launch(
     String url, {
     Map<String, String> headers,
-    Set<JavascriptChannel> javascriptChannels,
+    Set<MTTJavascriptChannel> javascriptChannels,
     bool withJavascript,
     bool clearCache,
     bool clearCookies,
@@ -321,22 +321,22 @@ class FlutterWebviewPlugin {
     await _channel.invokeMethod('resize', args);
   }
 
-  Set<String> _extractJavascriptChannelNames(Set<JavascriptChannel> channels) {
+  Set<String> _extractJavascriptChannelNames(Set<MTTJavascriptChannel> channels) {
     final Set<String> channelNames = channels == null
         // ignore: prefer_collection_literals
         ? Set<String>()
-        : channels.map((JavascriptChannel channel) => channel.name).toSet();
+        : channels.map((MTTJavascriptChannel channel) => channel.name).toSet();
     return channelNames;
   }
 
   void _handleJavascriptChannelMessage(
       final String channelName, final String message) {
     _javascriptChannels[channelName]
-        .onMessageReceived(JavascriptMessage(message));
+        .onMessageReceived(MTTJavascriptMessage(message));
   }
 
   void _assertJavascriptChannelNamesAreUnique(
-      final Set<JavascriptChannel> channels) {
+      final Set<MTTJavascriptChannel> channels) {
     if (channels == null || channels.isEmpty) {
       return;
     }

@@ -1,14 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
+import 'mtt_javascript_message.dart';
+
 final RegExp _validChannelNames = RegExp('^[a-zA-Z_][a-zA-Z0-9]*\$');
 
 /// A named channel for receiving messaged from JavaScript code running inside a web view.
-class JavascriptChannel {
+class MTTJavascriptChannel {
   /// Constructs a Javascript channel.
   ///
   /// The parameters `name` and `onMessageReceived` must not be null.
-  JavascriptChannel({
+  MTTJavascriptChannel({
     @required this.name,
     @required this.onMessageReceived,
   })  : assert(name != null),
@@ -33,4 +35,4 @@ class JavascriptChannel {
 }
 
 /// Callback type for handling messages sent from Javascript running in a web view.
-typedef void JavascriptMessageHandler(JavascriptMessage message);
+typedef void JavascriptMessageHandler(MTTJavascriptMessage message);

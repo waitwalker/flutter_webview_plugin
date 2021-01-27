@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_webview_plugin/src/javascript_channel.dart';
+import 'package:flutter_webview_plugin/src/mtt_javascript_channel.dart';
 
 import 'base.dart';
 
@@ -46,7 +46,7 @@ class WebviewScaffold extends StatefulWidget {
   final PreferredSizeWidget appBar;
   final String url;
   final Map<String, String> headers;
-  final Set<JavascriptChannel> javascriptChannels;
+  final Set<MTTJavascriptChannel> javascriptChannels;
   final bool withJavascript;
   final bool clearCache;
   final bool clearCookies;
