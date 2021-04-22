@@ -183,7 +183,6 @@ static NSString *const CHANNEL_NAME = @"flutter_webview_plugin";
     else {
         completionHandler(NSURLSessionAuthChallengePerformDefaultHandling,nil);
     }
-    
 }
 
 - (CGRect)parseRect:(NSDictionary *)rect {

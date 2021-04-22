@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 import 'mtt_javascript_message.dart';
@@ -11,11 +10,9 @@ class MTTJavascriptChannel {
   ///
   /// The parameters `name` and `onMessageReceived` must not be null.
   MTTJavascriptChannel({
-    @required this.name,
-    @required this.onMessageReceived,
-  })  : assert(name != null),
-        assert(onMessageReceived != null),
-        assert(_validChannelNames.hasMatch(name));
+    required this.name,
+    required this.onMessageReceived,
+  }) : assert(_validChannelNames.hasMatch(name));
 
   /// The channel's name.
   ///
